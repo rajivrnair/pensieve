@@ -8,7 +8,7 @@ import net.codebrewery.pensieve.resources.PingResource;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class PensieveApplication extends Application<PensieveConfiguration>{
+public class Pensieve extends Application<PensieveConfiguration>{
 
     @Override
     public void run(PensieveConfiguration configuration, Environment environment) throws Exception {
@@ -21,6 +21,6 @@ public class PensieveApplication extends Application<PensieveConfiguration>{
     }
 
     public static void main(String[] args) throws Exception {
-        new PensieveApplication().run(args);
+        new Pensieve().run(args);
     }
 }

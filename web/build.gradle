@@ -19,7 +19,7 @@ allprojects {
     apply plugin: 'application'
     apply plugin: 'com.github.johnrengelman.shadow'
 
-    mainClassName = 'net.codebrewery.pensieve.application.PensieveApplication'
+    mainClassName = 'net.codebrewery.pensieve.application.Pensieve'
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
