@@ -1,4 +1,4 @@
-package net.codebrewery.resources;
+package net.codebrewery.pensieve.resources;
 
 import com.codahale.metrics.annotation.Timed;
 

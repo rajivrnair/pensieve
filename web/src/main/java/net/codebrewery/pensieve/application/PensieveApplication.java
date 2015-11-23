@@ -1,10 +1,10 @@
-package net.codebrewery.application;
+package net.codebrewery.pensieve.application;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-import net.codebrewery.config.PensieveConfiguration;
-import net.codebrewery.health.PingHealthCheck;
-import net.codebrewery.resources.PingResource;
+import net.codebrewery.pensieve.config.PensieveConfiguration;
+import net.codebrewery.pensieve.health.PingHealthCheck;
+import net.codebrewery.pensieve.resources.PingResource;
 
 import java.util.concurrent.atomic.AtomicLong;
 
