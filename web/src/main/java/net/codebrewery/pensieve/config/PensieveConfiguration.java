@@ -1,4 +1,4 @@
-package net.codebrewery.config;
+package net.codebrewery.pensieve.config;
 
 import io.dropwizard.Configuration;
 

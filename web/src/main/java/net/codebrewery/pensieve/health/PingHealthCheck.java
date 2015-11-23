@@ -1,4 +1,4 @@
-package net.codebrewery.health;
+package net.codebrewery.pensieve.health;
 
 import com.codahale.metrics.health.HealthCheck;
 
