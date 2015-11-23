@@ -1,0 +1,34 @@
+server:
+  type: simple
+  applicationContextPath: /pensieve
+  connector:
+    type: http
+    port: 8080
+
+# Logging settings.
+logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+  # Logger-specific levels.
+#  loggers:
+    # Sets the level for 'com.example.app' to DEBUG.
+#    com.example.app: DEBUG
+
+  # Settings for logging to stdout.
+  appenders:
+    - type: console
+    - type: file
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      threshold: INFO
+      currentLogFilename: ./logs/pensieve.log
+      archivedLogFilenamePattern: ./logs/pensieve-%d.log.gz
+      archivedFileCount: 5
+#      timeZone: UTC
+  #    maxFileSize: 100MB
+
+
+metrics:
+  frequency: 5 minute
+  reporters:
+    - type: log
+      logger: metrics
