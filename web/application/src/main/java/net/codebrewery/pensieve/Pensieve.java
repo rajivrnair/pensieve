@@ -1,4 +1,4 @@
-package net.codebrewery.pensieve.application;
+package net.codebrewery.pensieve;
 
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;

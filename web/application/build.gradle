@@ -23,7 +23,7 @@ shadowJar {
     exclude 'META-INF/*.RSA'
 }
 
-mainClassName = 'net.codebrewery.pensieve.application.Pensieve'
+mainClassName = 'net.codebrewery.pensieve.Pensieve'
 
 jar {
 
