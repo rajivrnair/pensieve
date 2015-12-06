@@ -4,7 +4,7 @@ echo "Cleaning, building and jar-ing"
 ./gradlew clean shadowJar
 
 echo "Applying db migrations..."
-java -jar build/libs/pensieve-all.jar db migrate config/pensieve.yml
+java -jar application/build/libs/pensieve-application.jar db migrate config/pensieve.yml
 
 echo "Starting up..."
-java -jar build/libs/pensieve-all.jar server config/pensieve.yml
+java -jar application/build/libs/pensieve-application.jar server config/pensieve.yml
