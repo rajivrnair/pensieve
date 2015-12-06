@@ -1,14 +1,14 @@
 group 'net.codebrewery'
 version '1.0-SNAPSHOT'
 
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-}
-
 allprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+            jcenter()
+        }
+    }
+
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'application'
@@ -26,7 +26,6 @@ allprojects {
         compile group: 'io.dropwizard', name: 'dropwizard-core', version: "$dropWizardVersion"
         compile group: 'io.dropwizard', name: 'dropwizard-jdbi', version: "$dropWizardVersion"
         compile group: 'io.dropwizard', name: 'dropwizard-migrations', version: "$dropWizardVersion"
-        compile group: 'org.postgresql', name: 'postgresql', version: '9.3-1104-jdbc41'
 
         testCompile group: 'junit', name: 'junit', version: '4.11'
         testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.17'

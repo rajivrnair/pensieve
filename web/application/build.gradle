@@ -2,16 +2,16 @@ group 'net.codebrewery'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
     }
 }
 
+dependencies {
+    compile project(':core')
+}
+
+// JAR creation stuff
 apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
