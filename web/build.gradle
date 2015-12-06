@@ -6,20 +6,12 @@ buildscript {
         mavenCentral()
         jcenter()
     }
-
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
-    }
 }
 
 allprojects {
-
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'application'
-    apply plugin: 'com.github.johnrengelman.shadow'
-
-    mainClassName = 'net.codebrewery.pensieve.application.Pensieve'
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
@@ -40,31 +32,6 @@ allprojects {
         testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.17'
     }
 
-    shadowJar {
-        archiveName = 'pensieve-all.jar'
-        mergeServiceFiles()
-        exclude 'META-INF/MANIFEST.MF'
-        exclude 'META-INF/*.SF'
-        exclude 'META-INF/*.DSA'
-        exclude 'META-INF/*.RSA'
-    }
-
-    jar {
-
-        doFirst {
-            from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
-                exclude "META-INF/*.SF"
-                exclude "META-INF/*.DSA"
-                exclude "META-INF/*.RSA"
-            }
-        }
-
-        manifest {
-            attributes 'Main-Class': mainClassName
-            attributes 'Implementation-Title': 'Pensieve', 'Implementation-Version': version
-        }
-    }
-
     task wrapper(type: Wrapper) {
         gradleVersion = '2.2'
     }
@@ -73,5 +40,3 @@ allprojects {
         args 'server', './config/pensieve.yml'
     }
 }
-
-

@@ -1,0 +1,46 @@
+group 'net.codebrewery'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+    archiveName = 'pensieve-application.jar'
+    mergeServiceFiles()
+    exclude 'META-INF/MANIFEST.MF'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+}
+
+mainClassName = 'net.codebrewery.pensieve.application.Pensieve'
+
+jar {
+
+    doFirst {
+        from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
+            exclude "META-INF/*.SF"
+            exclude "META-INF/*.DSA"
+            exclude "META-INF/*.RSA"
+        }
+    }
+
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Implementation-Title': 'Pensieve', 'Implementation-Version': version
+    }
+}
+
+artifacts {
+    shadowJar
+}
