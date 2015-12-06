@@ -1,0 +1,6 @@
+group 'net.codebrewery'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.3-1104-jdbc41'
+}
