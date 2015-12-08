@@ -1,6 +1,7 @@
 package net.codebrewery.pensieve.resources;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.inject.Inject;
 import net.codebrewery.pensieve.database.ConnectionTestDAO;
 
 import javax.ws.rs.GET;
@@ -13,12 +14,11 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 @Path("/ping")
 @Produces(APPLICATION_JSON)
 public class PingResource {
-
-    private final AtomicLong counter;
+    private static final AtomicLong counter = new AtomicLong();
     private final ConnectionTestDAO dao;
 
-    public PingResource(AtomicLong counter, ConnectionTestDAO connectionTestDAO) {
-        this.counter = counter;
+    @Inject
+    public PingResource(ConnectionTestDAO connectionTestDAO) {
         this.dao = connectionTestDAO;
     }
 
