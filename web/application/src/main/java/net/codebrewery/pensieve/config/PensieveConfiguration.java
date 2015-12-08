@@ -11,15 +11,10 @@ public class PensieveConfiguration extends Configuration {
 
     @Valid
     @NotNull
+    @JsonProperty("dataSource")
     private DataSourceFactory database = new DataSourceFactory();
 
-    @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
         return database;
-    }
-
-    @JsonProperty("database")
-    public void setDataSourceFactory(DataSourceFactory database) {
-        this.database = database;
     }
 }
