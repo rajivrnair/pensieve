@@ -9,7 +9,8 @@ addons:
   postgresql: "9.3"
 
 before_script:
-  psql -c "create role pensieve with login;" -U postgres
-  psql -c "create database memories with owner pensieve;" -U postgres                                                                                                                                           !7030
+  - psql -c "create role pensieve with login;" -U postgres
+  - psql -c "create database memories with owner pensieve;" -U postgres                                                                                                                                           !7030
+
 script:
   ./web/run_me.sh
