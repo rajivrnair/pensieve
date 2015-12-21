@@ -1,0 +1,51 @@
+server:
+  type: simple
+  applicationContextPath: /pensieve
+  connector:
+    type: http
+    port: 8080
+
+# Logging settings.
+logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+  # Logger-specific levels.
+#  loggers:
+    # Sets the level for 'com.example.app' to DEBUG.
+#    com.example.app: DEBUG
+
+  # Settings for logging to stdout.
+  appenders:
+    - type: console
+    - type: file
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      threshold: INFO
+      currentLogFilename: ./logs/pensieve.log
+      archivedLogFilenamePattern: ./logs/pensieve-%d.log.gz
+      archivedFileCount: 5
+#      timeZone: UTC
+  #    maxFileSize: 100MB
+
+dataSource:
+  driverClass: org.postgresql.Driver
+  user: pensieve
+  password: pensieve
+  url: jdbc:postgresql://pensieve-database:5432/memories
+  properties:
+    charSet: UTF-8
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+  # the timeout before a connection validation queries fail
+  validationQueryTimeout: 3s
+  # the minimum number of connections to keep open
+  minSize: 8
+  # the maximum number of connections to keep open
+  maxSize: 32
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
+  # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
+  evictionInterval: 10s
+  # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
+  minIdleTime: 1 minute

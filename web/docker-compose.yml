@@ -1,0 +1,15 @@
+'pensieve-database':
+  image: postgres:9.3.10
+  environment:
+    POSTGRES_USER: pensieve
+    POSTGRES_PASSWORD: pensieve
+    POSTGRES_DB: memories
+  ports:
+    - "5555:5432"
+
+'pensieve-app':
+  image: pensieve_app
+  ports:
+    - "8888:8080"
+  links:
+    - 'pensieve-database'
