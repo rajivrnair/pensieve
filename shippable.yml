@@ -13,4 +13,4 @@ before_script:
   - psql -c "create database memories with owner pensieve;" -U postgres
 
 script:
-  cd web && ./run_me.sh
+  cd web && ./gradlew clean build shadowJar
