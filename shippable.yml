@@ -1,0 +1,15 @@
+# Build Environment
+build_environment: ubuntu1504
+
+language: java
+jdk:
+  - oraclejdk8
+
+addons:
+  postgresql: "9.3"
+
+before_script:
+  psql -c "create role pensieve with login;"
+  psql -c "create database memories with owner pensieve;"                                                                                                                                           !7030
+script:
+  ./web/run_me.sh
