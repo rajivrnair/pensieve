@@ -5,12 +5,5 @@ language: java
 jdk:
   - oraclejdk8
 
-addons:
-  postgresql: "9.3"
-
-before_script:
-  - psql -c "create role pensieve with role login password 'pensieve';" -U postgres
-  - psql -c "create database memories with owner pensieve;" -U postgres
-
 script:
   cd web && ./gradlew clean build shadowJar
