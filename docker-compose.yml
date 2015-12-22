@@ -13,6 +13,6 @@
 'pensieve-app':
   image: rajivrnair/pensieve
   ports:
-    - "8888:8080"
+    - "80:8080"
   links:
     - 'pensieve-database'
