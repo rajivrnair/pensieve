@@ -5,5 +5,12 @@ language: java
 jdk:
   - oraclejdk8
 
+before_script:
+  mkdir -p shippable/buildoutput
+
 script:
   cd web && ./gradlew clean build shadowJar
+
+after_script:
+  - cp web/application/build/libs/pensieve-application.jar ./shippable/buildoutput
+  - cp web/config/pensieve_docker.yml ./shippable/buildoutput/pensieve.yml
