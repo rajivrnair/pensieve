@@ -7,6 +7,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import net.codebrewery.pensieve.database.ConnectionTestDAO;
+import net.codebrewery.pensieve.database.MemoriesDAO;
 import org.skife.jdbi.v2.DBI;
 
 public class PensieveModule extends AbstractModule {
@@ -28,6 +29,12 @@ public class PensieveModule extends AbstractModule {
     @Singleton
     public ConnectionTestDAO createConnectionTestDAO(DBI database) {
         return database.onDemand(ConnectionTestDAO.class);
+    }
+
+    @Provides
+    @Singleton
+    public MemoriesDAO createMemoriesDAO(DBI database) {
+        return database.onDemand(MemoriesDAO.class);
     }
 
     @Override
