@@ -21,7 +21,7 @@ logging:
       logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
       threshold: INFO
       currentLogFilename: /var/logs/pensieve/pensieve.log
-      archivedLogFilenamePattern: /var/logs/pensieve/pensieve-%d.log.gz
+      archivedLogFilenamePattern: /var/logs/pensieve/pensieve-%d-%i.log.gz
       archivedFileCount: 5
       timeZone: UTC
       maxFileSize: 10MB
