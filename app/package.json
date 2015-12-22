@@ -30,7 +30,9 @@
     "electron-app"
   ],
   "dependencies": {
-    "electron-debug": "^0.2.1"
+    "electron-debug": "^0.2.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
     "babel-core": "^6.3",
