@@ -4,9 +4,11 @@
     POSTGRES_USER: pensieve
     POSTGRES_PASSWORD: pensieve
     POSTGRES_DB: memories
+    PGDATA: /var/pensieve/data
   ports:
     - "5555:5432"
-
+  volumes:
+    - /postgres/pensieve:/var/pensieve/data
 'pensieve-app':
   image: pensieve_app
   ports:
