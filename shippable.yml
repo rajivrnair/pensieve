@@ -11,6 +11,9 @@ before_script:
 script:
   cd web && ./gradlew clean build shadowJar && cd ..
 
+addons:
+  postgresql: "9.3"
+
 after_script:
   - cp web/application/build/libs/pensieve-application.jar ./shippable/buildoutput
   - cp web/config/pensieve_docker.yml ./shippable/buildoutput/pensieve.yml
