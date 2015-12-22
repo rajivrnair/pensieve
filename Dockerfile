@@ -1,6 +1,8 @@
+# For Shippable.io - we should merge this with the Dockerfile in web/
 FROM relateiq/oracle-java8
 
 RUN mkdir -p /data
+RUN mkdir -p /var/logs/pensieve
 
 # App dependencies
 ADD ./buildoutput/* /data/

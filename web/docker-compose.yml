@@ -9,9 +9,12 @@
     - "5555:5432"
   volumes:
     - /postgres/pensieve:/var/pensieve/data
+
 'pensieve-app':
   image: pensieve_app
   ports:
     - "8888:8080"
   links:
     - 'pensieve-database'
+  volumes:
+    - /var/logs/pensieve:/var/logs/pensieve

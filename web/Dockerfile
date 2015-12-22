@@ -1,6 +1,7 @@
 FROM relateiq/oracle-java8
 
 RUN mkdir -p /data
+RUN mkdir -p /var/logs/pensieve
 
 # App dependencies
 ADD application/build/libs/pensieve-application.jar /data/pensieve-application.jar
