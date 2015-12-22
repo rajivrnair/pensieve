@@ -4,7 +4,7 @@ echo "Stopping app container"
 docker ps | grep pensieve-app | awk '{print $1}' | xargs docker stop
 
 echo "Removing app container"
-docker ps | grep pensieve-app | awk '{print $1}' | xargs docker rm
+docker ps -a | grep pensieve-app | awk '{print $1}' | xargs docker rm
 
 echo "Fetching latest image"
 docker pull rajivrnair/pensieve
