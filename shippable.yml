@@ -9,7 +9,7 @@ before_script:
   mkdir -p shippable/buildoutput
 
 script:
-  cd web && ./gradlew clean build shadowJar
+  cd web && ./gradlew clean build shadowJar && cd ..
 
 after_script:
   - cp web/application/build/libs/pensieve-application.jar ./shippable/buildoutput
