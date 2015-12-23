@@ -30,18 +30,32 @@
     "electron-app"
   ],
   "dependencies": {
+    "axios": "^0.8.1",
     "electron-debug": "^0.2.1",
+    "history": "^1.13.1",
+    "immutable": "^3.7.6",
+    "keymirror": "^0.1.1",
+    "lodash": "^3.10.1",
+    "material-ui": "^0.13.4",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.3",
+    "react-router": "^1.0.2",
+    "react-tap-event-plugin": "^0.2.1",
+    "redux": "^3.0.5",
+    "uuid-v4": "^0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.3",
     "babel-loader": "^6.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
     "browser-sync": "^2.9.6",
     "browser-sync-webpack-plugin": "^1.0",
     "css-loader": "^0.23.0",
     "electron-packager": "^5.2",
     "electron-prebuilt": "^0.36",
+    "json-loader": "^0.5.4",
     "node-sass": "^3.3.3",
     "nodemon": "^1.8",
     "sass-loader": "^3.1",
