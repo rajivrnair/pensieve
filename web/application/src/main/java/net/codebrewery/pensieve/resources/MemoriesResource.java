@@ -3,6 +3,7 @@ package net.codebrewery.pensieve.resources;
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.inject.Inject;
 import net.codebrewery.pensieve.database.MemoriesDAO;
@@ -17,10 +18,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static net.codebrewery.pensieve.config.PensieveConfiguration.getDefaultDateFormat;
 
 @Path("/memories")
 @Produces(APPLICATION_JSON)
@@ -53,9 +56,6 @@ public class MemoriesResource {
 
     @GET
     public List<Memory> getAll(@Context HttpServletResponse response) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JodaModule());
-
         String asJSON = memoriesDAO.readAllAsJSON();
 
         try {
@@ -68,9 +68,12 @@ public class MemoriesResource {
         }
     }
 
+    // FIXME : is there a way to get Dropwizard's object mapper?
     private ObjectMapper getObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.setDateFormat(new SimpleDateFormat(getDefaultDateFormat()));
         return mapper;
     }
 }

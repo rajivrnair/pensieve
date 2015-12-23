@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class PensieveConfiguration extends Configuration {
+    private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
     @Valid
     @NotNull
@@ -16,5 +17,9 @@ public class PensieveConfiguration extends Configuration {
 
     public DataSourceFactory getDataSourceFactory() {
         return database;
+    }
+
+    public static String getDefaultDateFormat() {
+        return DEFAULT_DATE_FORMAT;
     }
 }
