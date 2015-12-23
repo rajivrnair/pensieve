@@ -22,11 +22,12 @@ public class Memory {
     public Memory() {
     }
 
-    public Memory(UUID id, String title, String content, String tags) {
+    public Memory(UUID id, String title, String content, String tags, DateTime createdOn) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.tags = tags;
+        this.createdOn = createdOn;
     }
 
     public UUID getId() {
@@ -47,5 +48,16 @@ public class Memory {
 
     public DateTime getCreatedOn() {
         return createdOn;
+    }
+
+    @Override
+    public String toString() {
+        return "Memory{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", tags='" + tags + '\'' +
+                ", createdOn=" + createdOn +
+                '}';
     }
 }

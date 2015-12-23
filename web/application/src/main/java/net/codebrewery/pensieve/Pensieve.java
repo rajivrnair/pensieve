@@ -23,7 +23,7 @@ public class Pensieve extends Application<PensieveConfiguration>{
     public void initialize(Bootstrap<PensieveConfiguration> bootstrap) {
         super.initialize(bootstrap);
 
-        customiseObjectMapper(bootstrap);
+//        customiseObjectMapper(bootstrap);
 
         bootstrap.addBundle(new MigrationsBundle<PensieveConfiguration>() {
             @Override

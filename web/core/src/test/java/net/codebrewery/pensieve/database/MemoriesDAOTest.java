@@ -1,8 +1,5 @@
 package net.codebrewery.pensieve.database;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import liquibase.Liquibase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
@@ -57,41 +54,34 @@ public class MemoriesDAOTest {
     @Test
     @Ignore
     public void createAndRead() throws IOException {
-        Memory memory = new Memory(id, "title - more important shit", "content with {code} true == TRUE {code}", "[a,b]");
+        DateTime now = DateTime.now();
+
+        Memory memory = new Memory(id, "title - more important shit", "content with {code} true == TRUE {code}", "[a,b]", now);
         dao.create(memory);
 
-        String asJSON = dao.readAsJSON(id);
-        memory = getObjectMapper().readValue(asJSON, Memory.class);
+        Memory fromDb = dao.read(id);
 
-        assertThat(memory.getId(), is(id));
-        assertThat(memory.getTitle(), is("title - more important shit"));
-        assertThat(memory.getContent(), is("content with {code} true == TRUE {code}"));
-        assertThat(memory.getTags(), is("[a,b]"));
+        assertThat(fromDb.getId(), is(id));
+        assertThat(fromDb.getTitle(), is("title - more important shit"));
+        assertThat(fromDb.getContent(), is("content with {code} true == TRUE {code}"));
+        assertThat(fromDb.getTags(), is("[a,b]"));
         // I know time should probably be frozen here - but don't need to at this point.
-        assertThat(memory.getCreatedOn().toString("dd-MM-yyyy HH"), is(DateTime.now().toString("dd-MM-yyyy HH")));
+        assertThat(fromDb.getCreatedOn().toString("dd-MM-yyyy HH:mm"), is(now.toString("dd-MM-yyyy HH:mm")));
     }
 
     @Test
     @Ignore
     public void readAll() throws IOException {
         UUID anId = randomUUID();
-        Memory memory = new Memory(anId, "important", "content with {code} true == TRUE {code}", "[a,b]");
+        Memory memory = new Memory(anId, "important", "content with {code} true == TRUE {code}", "[a,b]", DateTime.now());
         dao.create(memory);
         UUID anotherId = randomUUID();
-        memory = new Memory(anotherId, "more important", "content with {code} true != FALSE {code}", null);
+        memory = new Memory(anotherId, "more important", "content with {code} true != FALSE {code}", null, DateTime.now());
         dao.create(memory);
 
-        String asJSON = dao.readAllAsJSON();
+        List<Memory> fromDb = dao.readAll();
 
-        System.out.println("memories-asJSON: " + asJSON);
+        System.out.println("memories: " + fromDb);
 
-        List<Memory> memories = getObjectMapper().readValue(asJSON, new TypeReference<List<Memory>>(){});
-        System.out.println("memories: " + memories);
-    }
-
-    private ObjectMapper getObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JodaModule());
-        return mapper;
     }
 }
