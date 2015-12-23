@@ -14,7 +14,7 @@ It's like a personal wiki.
 — Albus Dumbledore to Harry Potter[Goblet of Fire]
 
 This is just a simple pensieve to help me remember stuff I've done before (mostly syntax of infrequently used commands).
-The idea is to build something I need while setting up a _containerized_, _continuously-delivered_ app in the _cloud_ (because it looks good on my resume!).
+The idea is to build something I need while setting up a _containerized_, _continuously-delivered_ app in the _cloud_ (because it looks good on my resume).
 
 Requirements of the app:
 - Save memories and retrieve them.
