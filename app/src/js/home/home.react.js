@@ -9,6 +9,9 @@ import Memories from './memories.react';
 import Header from './header.react';
 import AddMemory from './add-memory.react';
 
+import { addMemory, clearForm, setValues } from './actions';
+import { connect } from 'react-redux'
+
 import '../../styles/home.scss';
 
 class Home extends React.Component {
@@ -18,6 +21,9 @@ class Home extends React.Component {
     this.state = {
       muiTheme: ThemeManager.getMuiTheme(ColorTheme),
     };
+
+    this.onAddMemory = this.onAddMemory.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
   }
 
   getChildContext () {
@@ -26,11 +32,24 @@ class Home extends React.Component {
     };
   }
 
+  onAddMemory(memory) {
+    const { dispatch } = this.props;
+
+    dispatch(addMemory(memory));
+    dispatch(clearForm());
+  }
+
+  onValueChange(memory) {
+    const { dispatch } = this.props;
+
+    dispatch(setValues(memory));
+  }
+
   content() {
     return (
       <div className='content'>
-        <Memories />
-        <AddMemory />
+        <Memories memories={ this.props.memories.collection }/>
+        <AddMemory onAddMemory={ this.onAddMemory } values={ this.props.ui.form } onValueChange={ this.onValueChange } />
       </div>
     );
   }
@@ -54,4 +73,14 @@ Home.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
 
-export default Home;
+
+
+function select(state) {
+  return {
+    memories: state.memories,
+    ui: state.ui
+  };
+}
+
+// Wrap the component to inject dispatch and state into it
+export default connect(select)(Home);
