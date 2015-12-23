@@ -15,7 +15,7 @@ before_script:
   - psql -c 'create database memories with owner pensieve;' -U postgres
 
 script:
-  cd web && ./gradlew clean build shadowJar && cd ..
+    cd web && ./gradlew --stacktrace clean build shadowJar && cd ..
 
 after_script:
   - cp web/application/build/libs/pensieve-application.jar ./shippable/buildoutput
