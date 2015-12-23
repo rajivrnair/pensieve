@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-	entry: './src/main.js',
+	entry: './src/js/app.js',
 	output: {
 		path: __dirname + "/build",
 		filename: 'main.js'
@@ -47,6 +47,9 @@ module.exports = {
 			server: {
 				baseDir: ['.']
 			}
+		}),
+		new webpack.DefinePlugin({
+		  "process.env": { NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development") }
 		})
 	]
 };
