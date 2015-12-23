@@ -8,12 +8,14 @@ import com.google.inject.Inject;
 import net.codebrewery.pensieve.database.MemoriesDAO;
 import net.codebrewery.pensieve.domain.Memory;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -50,13 +52,15 @@ public class MemoriesResource {
     }
 
     @GET
-    public List<Memory> getAll() {
+    public List<Memory> getAll(@Context HttpServletResponse response) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
 
         String asJSON = memoriesDAO.readAllAsJSON();
 
         try {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            // List<Memory> myObjects = Arrays.asList(mapper.readValue(asJSON, Memory[].class)); - might be a perf boost.
             return getObjectMapper().readValue(asJSON, new TypeReference<List<Memory>>(){});
         } catch (IOException e) {
             e.printStackTrace();
