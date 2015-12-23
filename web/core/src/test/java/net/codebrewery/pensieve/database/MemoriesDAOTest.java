@@ -41,11 +41,11 @@ public class MemoriesDAOTest {
 
     @AfterClass
     public static void tearDown() {
-        try {
-            liquibase.dropAll();
-        } catch (Exception e) {
-            throw new RuntimeException("failed clearing up Liquibase object", e);
-        }
+//        try {
+//            liquibase.dropAll();
+//        } catch (Exception e) {
+//            throw new RuntimeException("failed clearing up Liquibase object", e);
+//        }
         handle.close();
     }
 
