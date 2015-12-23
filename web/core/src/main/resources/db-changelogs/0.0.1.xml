@@ -20,4 +20,11 @@
             <column name="tags" type="varchar2(400)" />
         </createTable>
     </changeSet>
+    <changeSet id="add created date to memories" author="rajivrnair">
+        <addColumn tableName="memories">
+            <column name="created_on" type="datetime">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

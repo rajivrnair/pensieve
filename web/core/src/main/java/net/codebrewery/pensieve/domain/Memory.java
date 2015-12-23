@@ -1,5 +1,8 @@
 package net.codebrewery.pensieve.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.DateTime;
+
 import java.util.UUID;
 
 public class Memory {
@@ -10,6 +13,9 @@ public class Memory {
     private String content;
 
     private String tags;
+
+    @JsonProperty("createdon")
+    private DateTime createdOn;
 
     // Required for JDBI
     @SuppressWarnings("unused")
@@ -27,31 +33,19 @@ public class Memory {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public DateTime getCreatedOn() {
+        return createdOn;
     }
 }

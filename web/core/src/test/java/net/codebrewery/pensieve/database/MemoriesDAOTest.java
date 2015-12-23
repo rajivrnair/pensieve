@@ -1,10 +1,12 @@
 package net.codebrewery.pensieve.database;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import liquibase.Liquibase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import net.codebrewery.pensieve.domain.Memory;
+import org.joda.time.DateTime;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -53,6 +55,8 @@ public class MemoriesDAOTest {
         dao.create(memory);
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JodaModule());
+
         String asJSON = dao.readAsJSON(id);
         memory = mapper.readValue(asJSON, Memory.class);
 
@@ -60,5 +64,7 @@ public class MemoriesDAOTest {
         assertThat(memory.getTitle(), is("title - more important shit"));
         assertThat(memory.getContent(), is("content with {code} true == TRUE {code}"));
         assertThat(memory.getTags(), is("[a,b]"));
+        // I know time should probably be frozen here - but don't need to at this point.
+        assertThat(memory.getCreatedOn().toString("dd-MM-yyyy HH"), is(DateTime.now().toString("dd-MM-yyyy HH")));
     }
 }

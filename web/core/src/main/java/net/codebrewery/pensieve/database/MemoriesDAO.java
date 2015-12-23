@@ -11,10 +11,12 @@ import java.util.UUID;
 
 public interface MemoriesDAO {
 
-    @SqlUpdate("insert into memories (id, title, content, tags) values (:id, :title, :content, :tags)")
+    @SqlUpdate("insert into memories (id, title, content, tags, created_on) values (:id, :title, :content, :tags, now())")
     void create(@BindBean Memory memory);
 
-    @SqlQuery("select row_to_json(memories) from memories where id = :id")
+    @SqlQuery("select row_to_json(t) from (" +
+                "select id, title, content, tags, created_on as createdOn from memories where id = :id" +
+            ") t")
     String readAsJSON(@Bind("id") UUID id);
 
     @SqlQuery("select row_to_json(memories) from memories")
