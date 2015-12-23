@@ -4,11 +4,13 @@ import liquibase.Liquibase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import net.codebrewery.pensieve.domain.Memory;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.joda.time.DateTime;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
@@ -17,13 +19,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MemoriesDAOTest {
 
-    private static DBI dbi = new DBI("jdbc:postgresql://localhost:5432/memories", "pensieve", "pensieve");
+    private static DBI dbi = new DBI("jdbc:postgresql://localhost:5432/memories_test", "pensieve", "pensieve");
     MemoriesDAO dao;
     private static Handle handle;
     private static Liquibase liquibase;
@@ -38,11 +41,11 @@ public class MemoriesDAOTest {
 
     @AfterClass
     public static void tearDown() {
-//        try {
-//            liquibase.dropAll();
-//        } catch (Exception e) {
-//            throw new RuntimeException("failed clearing up Liquibase object", e);
-//        }
+        try {
+            liquibase.dropAll();
+        } catch (Exception e) {
+            throw new RuntimeException("failed clearing up Liquibase object", e);
+        }
         handle.close();
     }
 
@@ -52,7 +55,6 @@ public class MemoriesDAOTest {
     }
 
     @Test
-    @Ignore
     public void createAndRead() throws IOException {
         DateTime now = DateTime.now();
 
@@ -70,7 +72,6 @@ public class MemoriesDAOTest {
     }
 
     @Test
-    @Ignore
     public void readAll() throws IOException {
         UUID anId = randomUUID();
         Memory memory = new Memory(anId, "important", "content with {code} true == TRUE {code}", "[a,b]", DateTime.now());
@@ -81,7 +82,25 @@ public class MemoriesDAOTest {
 
         List<Memory> fromDb = dao.readAll();
 
-        System.out.println("memories: " + fromDb);
+        assertThat(fromDb, hasMemories(anId, anotherId));
 
+    }
+
+    private Matcher<? super List<Memory>> hasMemories(UUID... uuids) {
+        return new TypeSafeMatcher<List<Memory>>() {
+            List<UUID> idsToMatch = newArrayList(uuids);
+
+            @Override
+            protected boolean matchesSafely(List<Memory> items) {
+                items.stream().filter(memory -> idsToMatch.contains(memory.getId())).forEach(memory -> idsToMatch.remove(memory.getId()));
+
+                return idsToMatch.isEmpty();
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Missing Id(s):" + idsToMatch);
+            }
+        };
     }
 }

@@ -13,6 +13,7 @@ before_script:
   - psql -c "create user pensieve with password 'pensieve';" -U postgres
   - psql -c 'alter user pensieve CREATEDB;' -U postgres
   - psql -c 'create database memories with owner pensieve;' -U postgres
+  - psql -c 'create database memories_test with owner pensieve;' -U postgres
 
 script:
     cd web && ./gradlew --stacktrace clean build shadowJar && cd ..
