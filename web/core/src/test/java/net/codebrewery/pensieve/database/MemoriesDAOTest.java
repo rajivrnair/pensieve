@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
@@ -50,6 +51,7 @@ public class MemoriesDAOTest {
     }
 
     @Test
+    @Ignore
     public void createAndRead() throws Exception {
         Memory memory = new Memory(id, "title - more important shit", "content with {code} true == TRUE {code}", "[a,b]");
         dao.create(memory);
