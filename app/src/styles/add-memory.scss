@@ -1,0 +1,26 @@
+.add-memory-card {
+  margin-top: 50px;
+  // Sadly material-css uses inline styles to style elements
+  > div > div:first-child {
+    height: auto!important;
+    padding-bottom: 0!important;
+
+    & + div {
+      padding-top: 0!important;
+    }
+
+    > span {
+      display: none;
+    }
+
+    span {
+      font-size: 18px!important;
+    }
+  }
+
+  textarea {
+    height: 15rem!important;
+    font-family: monospace!important;
+    white-space: pre!important;
+  }
+}
