@@ -1,7 +1,7 @@
 ##Pensieve
 
 ###TLDR;
-A simple app for developers to save their not-so-frequently-used commands/syntax/snippets of code - for the things we've done but forget after a while.
+A simple app for developers to save their not-so-frequently-used commands/syntax/snippets of code - for the things we've done but have forgotten after a while.
 It's like a personal wiki.
 
 ###The dramatic version
