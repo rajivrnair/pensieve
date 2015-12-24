@@ -7,7 +7,6 @@ import { showMemoryDetail } from './actions';
 
 import marked from 'marked';
 
-import highlight from 'highlight.js';
 import '../../styles/detail-view.scss';
 
 class DetailView extends React.Component {
@@ -42,13 +41,6 @@ class DetailView extends React.Component {
         primary={true}
         onClick={handleOK} />
     ];
-
-    marked.setOptions({
-      highlight: function (code) {
-        return require('highlight.js').highlightAuto(code).value;
-      }
-    });
-
 
     return (
       <Dialog
