@@ -54,6 +54,7 @@ class AddMemory extends React.Component {
           <div className='add-memory' ref='content'>
             <TextField hintText="Title" floatingLabelText="Title" style={{ width: '100%', color: '#fff' }} onChange={ this.onValueChange.bind(null, 'title') } value={ this.props.values.title } />
             <TextField floatingLabelText="Snippet" multiLine style={{ width: '100%', color: '#fff' }} onChange={ this.onValueChange.bind(null, 'content') } value={ this.props.values.content } />
+            <TextField hintText="Tags" floatingLabelText="Tags" style={{ width: '100%', color: '#fff' }} onChange={ this.onValueChange.bind(null, 'tags') } value={ this.props.values.tags } />
           </div>
         </CardText>
         <CardActions style={{ textAlign: 'right' }}>

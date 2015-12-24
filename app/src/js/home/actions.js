@@ -9,7 +9,8 @@ export function addMemory(memory) {
   const data = {
     id: uuid(),
     title: memory.title,
-    content: memory.content
+    content: memory.content,
+    tags: memory.tags
   };
 
   axios.post(`${baseUrl}/memories`, data);
@@ -24,7 +25,8 @@ export function getMemories() {
   axios.post(`${baseUrl}/memories`, {
     id: uuid.v4(),
     title: memory.title,
-    content: memory.content
+    content: memory.content,
+    tags: memory.tags
   });
 };
 
