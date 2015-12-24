@@ -32,19 +32,25 @@ public class MemoriesResource {
     @POST
     @Timed
     @Consumes(APPLICATION_JSON)
-    public void create(Memory memory) {
+    public void create(Memory memory, @Context HttpServletResponse response) {
         memoriesDAO.create(memory);
+        setAccessControlHeader(response);
     }
 
     @GET
     @Path("/{id}")
-    public Memory get(@PathParam("id") UUID uuid) {
+    public Memory get(@PathParam("id") UUID uuid, @Context HttpServletResponse response) {
+        setAccessControlHeader(response);
         return memoriesDAO.read(uuid);
     }
 
     @GET
     public List<Memory> getAll(@Context HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        setAccessControlHeader(response);
         return memoriesDAO.readAll();
+    }
+
+    private void setAccessControlHeader(@Context HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
     }
 }
