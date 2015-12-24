@@ -25,8 +25,9 @@ function onClosed() {
 
 function createMainWindow() {
 	const win = new BrowserWindow({
-		width: 600,
-		height: 400
+		width: 1280,
+		height: 800,
+		'web-preferences': {'web-security': false}
 	});
 
 	if (process.env['NODE_ENV'] == 'dev') {
