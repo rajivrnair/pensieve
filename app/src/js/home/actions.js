@@ -39,13 +39,20 @@ export function clearForm() {
 export function setValues(memory) {
   return {
     type: ActionTypes.SET_VALUES,
-    memory: memory
+    memory
   };
 };
 
 export function search(criteria) {
   return {
     type: ActionTypes.SEARCH_MEMORY,
-    criteria: criteria
+    criteria
+  };
+};
+
+export function showMemoryDetail(item) {
+  return {
+    type: ActionTypes.SHOW_MEMORY_DETAIL,
+    item
   };
 };

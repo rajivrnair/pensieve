@@ -5,5 +5,6 @@ export default keymirror({
   GET_MEMORIES: null,
   SEARCH_MEMORY: null,
   CLEAR_FORM: null,
-  SET_VALUES: null
+  SET_VALUES: null,
+  SHOW_MEMORY_DETAIL: null
 });

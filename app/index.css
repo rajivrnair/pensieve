@@ -1,7 +1,11 @@
 html,
 body {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  font-family: "Arimo", sans-serif !important; }
+
+*:not(.fa) {
+  font-family: "Arimo", sans-serif !important; }
 
 header {
   position: absolute;

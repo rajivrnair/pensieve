@@ -32,10 +32,12 @@
   "dependencies": {
     "axios": "^0.8.1",
     "electron-debug": "^0.2.1",
+    "highlight.js": "^9.0.0",
     "history": "^1.13.1",
     "immutable": "^3.7.6",
     "keymirror": "^0.1.1",
     "lodash": "^3.10.1",
+    "marked": "^0.3.5",
     "material-ui": "^0.13.4",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
