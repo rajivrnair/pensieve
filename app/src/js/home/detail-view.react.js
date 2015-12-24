@@ -11,10 +11,8 @@ import highlight from 'highlight.js';
 import '../../styles/detail-view.scss';
 
 class DetailView extends React.Component {
-  tags() {
-    const { item } = this.props;
-
-    return item.tags.split(',').map(tag => {
+  tags(itemForDisplay) {
+    return itemForDisplay.tags.split(',').map(tag => {
       return (
         <li className='tag fa fa-hashtag'>
           <span>{ tag }</span>
@@ -26,8 +24,12 @@ class DetailView extends React.Component {
   dialog() {
     const { dispatch, item } = this.props;
 
+    let itemForDisplay;
+
     if (_.isEmpty(item)) {
-      return null;
+      itemForDisplay = { title: '', content: '', tags: '' };
+    } else {
+      itemForDisplay = item;
     }
 
     const handleOK = () => {
@@ -50,15 +52,15 @@ class DetailView extends React.Component {
 
     return (
       <Dialog
-        title={item.title}
+        title={itemForDisplay.title}
         actions={customActions}
         actionFocus="submit"
         open={!_.isEmpty(item)}
         onRequestClose={handleOK}>
         <div>
-          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(item.content)}}></div>
+          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(itemForDisplay.content)}}></div>
           <ul className='tags'>
-            { this.tags() }
+            { this.tags(itemForDisplay) }
           </ul>
         </div>
       </Dialog>
