@@ -58,7 +58,7 @@ class DetailView extends React.Component {
         open={!_.isEmpty(item)}
         onRequestClose={handleOK}>
         <div>
-          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(itemForDisplay.content)}}></div>
+          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(itemForDisplay.content.replace(/\n/ig, '<br>'))}}></div>
           <ul className='tags'>
             { this.tags(itemForDisplay) }
           </ul>
