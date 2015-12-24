@@ -7,7 +7,6 @@ import { showMemoryDetail } from './actions';
 
 import marked from 'marked';
 
-import highlight from 'highlight.js';
 import '../../styles/detail-view.scss';
 
 class DetailView extends React.Component {
@@ -43,13 +42,6 @@ class DetailView extends React.Component {
         onClick={handleOK} />
     ];
 
-    marked.setOptions({
-      highlight: function (code) {
-        return require('highlight.js').highlightAuto(code).value;
-      }
-    });
-
-
     return (
       <Dialog
         title={itemForDisplay.title}
@@ -58,7 +50,7 @@ class DetailView extends React.Component {
         open={!_.isEmpty(item)}
         onRequestClose={handleOK}>
         <div>
-          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(itemForDisplay.content)}}></div>
+          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(itemForDisplay.content.replace(/\n/ig, '<br>'))}}></div>
           <ul className='tags'>
             { this.tags(itemForDisplay) }
           </ul>

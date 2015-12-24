@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: "Arimo", sans-serif !important; }
 
-*:not(.fa) {
+*:not(.fa, code, pre) {
   font-family: "Arimo", sans-serif !important; }
 
 header {
