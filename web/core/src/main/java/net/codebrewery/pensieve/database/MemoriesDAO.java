@@ -20,6 +20,6 @@ public interface MemoriesDAO {
     @SqlQuery("select * from memories where id = :id")
     Memory read(@Bind("id") UUID id);
 
-    @SqlQuery("select * from memories")
+    @SqlQuery("select * from memories order by created_on desc")
     List<Memory> readAll();
 }
