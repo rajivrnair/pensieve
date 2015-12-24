@@ -14,8 +14,8 @@ const uiInitialState = {
 
 function uiState(state = uiInitialState, action) {
   switch (action.type) {
-    case MemoryActionTypes.SEARCH:
-      return state;
+    case MemoryActionTypes.SEARCH_MEMORY:
+      return Object.assign({}, state, { search: { criteria: action.criteria } });
       break;
     case MemoryActionTypes.CLEAR_FORM:
       return Object.assign({}, state, { form: { title: '', content: '' } });
@@ -33,6 +33,10 @@ function memories(state = memoriesInitialState, action) {
     case MemoryActionTypes.ADD_MEMORY:
       return {
         collection: [...state.collection, action.memory]
+      };
+    case MemoryActionTypes.GET_MEMORIES:
+      return {
+        collection: action.collection
       };
     default:
       return state;

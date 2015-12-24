@@ -22,11 +22,11 @@ export function addMemory(memory) {
 };
 
 export function getMemories() {
-  axios.post(`${baseUrl}/memories`, {
-    id: uuid.v4(),
-    title: memory.title,
-    content: memory.content,
-    tags: memory.tags
+  return axios.get(`${baseUrl}/memories`).then(response => {
+    return {
+      collection: response.data,
+      type: ActionTypes.GET_MEMORIES
+    };
   });
 };
 
@@ -40,5 +40,12 @@ export function setValues(memory) {
   return {
     type: ActionTypes.SET_VALUES,
     memory: memory
+  };
+};
+
+export function search(criteria) {
+  return {
+    type: ActionTypes.SEARCH_MEMORY,
+    criteria: criteria
   };
 };
