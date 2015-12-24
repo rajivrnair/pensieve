@@ -8,8 +8,21 @@ import { showMemoryDetail } from './actions';
 import marked from 'marked';
 
 import highlight from 'highlight.js';
+import '../../styles/detail-view.scss';
 
 class DetailView extends React.Component {
+  tags() {
+    const { item } = this.props;
+
+    return item.tags.split(',').map(tag => {
+      return (
+        <li className='tag fa fa-hashtag'>
+          <span>{ tag }</span>
+        </li>
+      );
+    });
+  }
+
   dialog() {
     const { dispatch, item } = this.props;
 
@@ -30,7 +43,7 @@ class DetailView extends React.Component {
 
     marked.setOptions({
       highlight: function (code) {
-        return require('highlight').highlightAuto(code).value;
+        return require('highlight.js').highlightAuto(code).value;
       }
     });
 
@@ -42,7 +55,12 @@ class DetailView extends React.Component {
         actionFocus="submit"
         open={!_.isEmpty(item)}
         onRequestClose={handleOK}>
-        <div dangerouslySetInnerHTML={{__html: marked(item.content)}}></div>
+        <div>
+          <div className='detail-view' dangerouslySetInnerHTML={{__html: marked(item.content)}}></div>
+          <ul className='tags'>
+            { this.tags() }
+          </ul>
+        </div>
       </Dialog>
     );
   }
