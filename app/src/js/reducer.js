@@ -9,7 +9,8 @@ const uiInitialState = {
   search: {
     criteria: ''
   },
-  form: { title: '', content: '' }
+  form: { title: '', content: '' },
+  detailView: null
 };
 
 function uiState(state = uiInitialState, action) {
@@ -22,6 +23,9 @@ function uiState(state = uiInitialState, action) {
       break;
     case MemoryActionTypes.SET_VALUES:
       return Object.assign({}, state, { form: action.memory });
+      break;
+    case MemoryActionTypes.SHOW_MEMORY_DETAIL:
+      return Object.assign({}, state, { detailView: action.item });
       break;
     default:
       return state;

@@ -58,7 +58,7 @@ class AddMemory extends React.Component {
           </div>
         </CardText>
         <CardActions style={{ textAlign: 'right' }}>
-          <FlatButton label="Reset" onTouchTap={this.onReset} />
+          <FlatButton label="Reset" onClick={this.onReset} />
           <FlatButton label="Save" onClick={this.onSave} />
         </CardActions>
       </Card>

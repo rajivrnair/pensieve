@@ -2,15 +2,18 @@ import React from 'react';
 
 import ColorTheme from '../color-theme';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ToggleStar from 'material-ui/lib/svg-icons/toggle/star';
+import Dialog from 'material-ui/lib/dialog';
+import FlatButton from 'material-ui/lib/flat-button';
+
+import _ from 'lodash';
+import { connect } from 'react-redux'
 
 import Memories from './memories.react';
 import Header from './header.react';
 import AddMemory from './add-memory.react';
 
-import { addMemory, clearForm, setValues, getMemories, search } from './actions';
-import { connect } from 'react-redux'
+import { addMemory, clearForm, setValues, getMemories, search, showMemoryDetail } from './actions';
 
 import '../../styles/home.scss';
 
@@ -59,11 +62,47 @@ class Home extends React.Component {
   }
 
   content() {
+    const { dispatch } = this.props;
+
+    const onItemClick = item => {
+      dispatch(showMemoryDetail(item));
+    };
+
     return (
       <div className='content'>
-        <Memories memories={ this.props.memories.collection }/>
+        <Memories memories={ this.props.memories.collection } onItemClick={ onItemClick } />
         <AddMemory onAddMemory={ this.onAddMemory } values={ this.props.ui.form } onValueChange={ this.onValueChange } />
       </div>
+    );
+  }
+
+  detailView() {
+    const item = this.props.ui.detailView;
+    const { dispatch } = this.props;
+
+    if (_.isEmpty(item)) {
+      return null;
+    }
+
+    const handleOK = () => {
+      dispatch(showMemoryDetail(null));
+    };
+
+    let customActions = [
+      <FlatButton
+        label="Got it!"
+        primary={true}
+        onClick={handleOK} />
+    ];
+
+    return (
+      <Dialog
+        title={item.title}
+        actions={customActions}
+        actionFocus="submit"
+        open={!_.isEmpty(item)}
+        onRequestClose={handleOK}>
+      </Dialog>
     );
   }
 
@@ -72,7 +111,7 @@ class Home extends React.Component {
       <div className='home-page'>
         <Header onSearch={ this.onSearch } />
         { this.content() }
-        <FloatingActionButton style={{ position: 'fixed', right: '3%', bottom: '5%' }}><ToggleStar /></FloatingActionButton>
+        { this.detailView() }
       </div>
     );
   }
@@ -90,15 +129,7 @@ function searchMemories(memories, criteria) {
   return memories.filter(memory => {
     const regex = new RegExp(criteria, 'i');
 
-    if (regex.test(memory.content)) {
-      return true;
-    }
-
-    if (regex.test(memory.title)) {
-      return true;
-    }
-
-    if (regex.test(memory.tags.join(' '))) {
+    if (regex.test(memory.content) || regex.test(memory.title) || regex.test(memory.tags)) {
       return true;
     }
 
