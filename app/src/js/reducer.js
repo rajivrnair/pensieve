@@ -49,7 +49,7 @@ function memories(state = memoriesInitialState, action) {
 
 function PensieveApp(state = { ui: uiInitialState, memories: memoriesInitialState }, action) {
   return {
-    ui: uiState(state.uiState, action),
+    ui: uiState(state.ui, action),
     memories: memories(state.memories, action)
   };
 }
